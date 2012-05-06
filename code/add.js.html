@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home - Solr client for node.js
+    <title>Code Documentation for examples/add.js - Solr client for node.js
     </title>
-    <meta name="description" content="&lt;p&gt;A solr client for indexing, adding, deleting, committing and searching documents within an Apache Solr installation (version&gt;=3.2).&lt;/p&gt;
-">
-    <meta name="keywords" content="solr,client,javascript,node.js,module,search,add,commit,documents">
     <script type="text/javascript">var ghuser = 'lbdremy'
   , ghproject = 'solr-node-client';
 
@@ -21,16 +18,18 @@
   </head>
   <body><img id="githubfork" src="/solr-node-client/public/img/github_fork.png">
     <nav>
-      <ul class="sections">
-        <li><a href="#features" class="scroll">Features</a>
-        </li>
-        <li><a href="#installation" class="scroll">Installation</a>
-        </li>
-        <li><a href="#contributors" class="scroll">Contributors</a>
-        </li>
-        <li><a href="#getting-help" class="scroll">Getting Help</a>
-        </li>
-        <li><a href="#licence" class="scroll">Licence</a>
+      <div class="box-wrap antiscroll-wrap">
+        <div class="box">
+          <div class="antiscroll-inner">
+            <div class="box-inner">
+              <ul class="sections">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="pages">
+        <li><a href="/solr-node-client">Home</a>
         </li>
       </ul>
       <ul class="code">
@@ -105,61 +104,46 @@
       </div>
     </header>
     <section id="content">
-      <article>
-        <h1 id="features-section"><a name="features">Features</a>
-        </h1>
-        <section><ul>
-<li>Commands supported: search(select), index, delete, update, commit, rollback, optimize, ping</li>
-<li>Lucene query / DisMax query</li>
-<li>Grouping / Field Collapsing. (Apache Solr version must be &gt;= 3.3)</li>
-<li>Convenients methods for querying with Facet, MoreLikeThis</li>
-<li>HTTP Basic Access Authentication</li>
-</ul>
+      <div id="code">
+        <article class="codeblock">
+          <div class="header"><p>Add documents into the Solr index.</p>
+          </div>
+          <div class="description">
+          </div>
+          <div class="view-source">Hide Source
+          </div>
+          <div class="code-wrap">
+            <pre class="source prettyprint"><code>// Use `var solr = require('solr-client')` in your code 
+var solr = require('./../lib/solr'); 
 
-        </section>
-        <h1 id="installation-section"><a name="installation">Installation</a>
-        </h1>
-        <section><p>Install with <a href="http://search.npmjs.org/#/solr-client">npm</a>.
+// Create a client
+var client = solr.createClient();
 
-</p>
-<pre><code>npm install solr-client</code></pre>
+// Switch on &quot;auto commit&quot;, by default `client.autoCommit = false`
+client.autoCommit = true;
 
-        </section>
-        <h1 id="contributors-section"><a name="contributors">Contributors</a>
-        </h1>
-        <section><pre><code>active : 27 days
-files  : 25
-authors: 
-   79    Remy Loubradou          98%
-   1    Jos Shepherd            1.0%
-   1    Wayne Larsen            1.0%</code></pre>
+var docs = [];
+for(var i = 0; i &lt;= 10 ; i++){
+   var doc = {
+       id : 12345 + i,
+       title_t : &quot;Title &quot;+ i,
+       description_t : &quot;Text&quot;+ i + &quot;Alice&quot;
+   }
+   docs.push(doc);
+}
 
-        </section>
-        <h1 id="getting-help-section"><a name="getting-help">Getting Help</a>
-        </h1>
-        <section><p>If you have questions or issues, please use <a href="https://github.com/lbdremy/solr-node-client/issues?sort=created&amp;direction=desc&amp;state=open">Github Issues</a>.
-</p>
-
-        </section>
-        <h1 id="licence-section"><a name="licence">Licence</a>
-        </h1>
-        <section><p>(The MIT License)
-
-</p>
-<p>Copyright 2011-2012 HipSnip Limited
-
-</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-</p>
-<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-</p>
-<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-</p>
-
-        </section>
-      </article>
+// Add documents
+client.add(docs,function(err,obj){
+   if(err){
+      console.log(err);
+   }else{
+      console.log(obj);
+   }
+});</code>
+            </pre>
+          </div>
+        </article>
+      </div>
     </section>
     <footer>
       <div class="branding">Solr client for node.js&nbsp;. site generated by
